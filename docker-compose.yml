@@ -1,0 +1,21 @@
+version: '2.3'
+networks:
+  bridge:
+    driver: bridge
+services:
+
+  showdoc:
+    image: star7th/showdoc
+    restart: "always"
+    networks:
+    - bridge
+    environment:
+      TZ: "Asia/Shanghai"
+      TIME_ZONE: "Asia/Shanghai"
+    volumes:
+    - ./localtime:/usr/share/zoneinfo/Asia/Shanghai:ro
+    - ./localtime:/etc/localtime:ro
+    - ./timezone:/etc/timezone:ro
+    - ./showdoc_data/html:/var/www/html/:rw
+    ports:
+    - "4999:80"
